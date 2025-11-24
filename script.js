@@ -40,11 +40,7 @@ btn.onclick = () => {
     recordedChunks = [];
     met.play();
     mediaRecorder.start();
-    if (player.src){
-        player.play();
-    }
     btn.style.backgroundColor = "green";
-
 }
 
 
