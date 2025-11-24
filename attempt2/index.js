@@ -6,6 +6,7 @@ let display4 = document.getElementById("display4");
 let startBtn = document.getElementById("startBtn");
 let stopBtn = document.getElementById("stopBtn");
 let playBtn = document.getElementById("play")
+let selector = document.getElementById("vidChoice")
 let recordedChunks = [];
 
 
@@ -23,18 +24,19 @@ async function main() {
     mediaRecorder.onstop = () => {
         const blob = new Blob(recordedChunks, {type: 'video/webm' })
         const videoURL = URL.createObjectURL(blob);
-        if (display1.getAttribute('src') === null){
+        if (selector.value === "Video 1"){
                 display1.src = videoURL;
             }
-        else if (display2.getAttribute('src') === null){
+        else if (selector.value === "Video 2"){
                 display2.src = videoURL;
             }
-        else if (display3.getAttribute('src') === null){
+        else if (selector.value === "Video 3"){
             display3.src = videoURL;
             }
-        else if (display4.getAttribute('src') === null){
+        else if (selector.value === "Video 4"){
             display4.src = videoURL;
         }
+        display1.muted = false;
     }
 }
 
@@ -56,7 +58,6 @@ stopBtn.onclick = () => {
 
 
 playBtn.onclick = () => {
-    display1.muted = false;
     display1.play();
     display2.play();
     display3.play();

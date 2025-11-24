@@ -1,0 +1,44 @@
+body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#recordingScreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#videos {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#vids12 {
+    display: flex;
+    justify-content: center;
+}
+
+#vids34 {
+    display: flex;
+    justify-content: center;
+}
+
+
+#playholder{
+    display: flex;
+    justify-content: center;
+}
+
+#play {
+    width: 50px;
+}
+
+#screen {
+    transform: scaleX(-1);
+}
