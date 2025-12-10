@@ -7,6 +7,14 @@ let audio5 = document.getElementById("audio5");
 let audio6 = document.getElementById("audio6");
 let audio7 = document.getElementById("audio7");
 let audio8 = document.getElementById("audio8");
+let img1 = document.getElementById("img1");
+let img2 = document.getElementById("img2");
+let img3 = document.getElementById("img3");
+let img4 = document.getElementById("img4");
+let metImages = [img1, img2, img3, img4]
+let metToggle = document.getElementById("strtMet")
+let shouldContinue = true;
+let interval;
 let startBtn1 = document.getElementById("startBtn");
 let stopBtn1 = document.getElementById("stopBtn");
 let startBtn2 = document.getElementById("startBtn2");
@@ -104,22 +112,60 @@ startBtn2.addEventListener("click" , () => {
     mediaRecorder.start();
     startBtn2.style.backgroundColor = "green"
     display.play();
+    shouldContinue=true;
+    metronome();
 }) 
 
 stopBtn2.addEventListener("click", () => {
     mediaRecorder.stop();
     startBtn2.style.backgroundColor = "white"
-    display.pause();
-    display.currentTime = 0;
+    if (display.src){
+        display.pause();
+        display.currentTime = 0;
+    }
+    shouldContinue=false;
+    metronome();
 } )
 
 
+
+metToggle.addEventListener("change", () => {
+    if (metToggle.checked){
+        shouldContinue=true;
+        metronome();
+    }
+    else{
+        shouldContinue=false;
+        metronome();
+    }
+})
+
+function metronome() {
+    if (shouldContinue) {
+        let index = 0;
+        let next_index = 1;
+        interval = setInterval( () => {
+            metImages[index].src = metImages[index].src.endsWith("greenCircle.png") ? "grayCircle.png" : "greenCircle.png";
+            metImages[next_index].src = metImages[next_index].src == "greenCircle.png" ? "grayCircle.png" : "greenCircle.png";
+            index = (index + 1) % 4
+            next_index = (next_index + 1) % 4
+        }, 500)
+    }
+    else {
+        clearInterval(interval);
+        img1.src = "greenCircle.png"
+        img2.src = "grayCircle.png"
+        img3.src = "grayCircle.png"
+        img4.src = "grayCircle.png"
+    }
+}
 
 
 playBtn.addEventListener("click", renderSound)
 
 async function renderSound() {
     audioBlobs = []
+    const startTime = audioContext.currentTime + 0.5;
     audioElements.forEach(element => {
         if (element){
             audioBlobs.push(element)
@@ -139,7 +185,7 @@ async function renderSound() {
 
     // 4. Start playback
     // The "0" means start playback immediately (at time 0)
-    source.start(0); 
+    source.start(startTime); 
 }); 
 }
 
