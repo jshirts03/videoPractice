@@ -1,0 +1,16 @@
+#recordingScreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#screen {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.audioHolder {
+    display: flex;
+    justify-content: center;
+}
